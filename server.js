@@ -1,4 +1,56 @@
+const express = require('express');
+const http = require('http');
+const WebSocket = require('ws');
 
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', (ws) => {
+  console.log('Cliente conectado');
+
+  ws.on('message', (message) => {
+    console.log(`Mensaje recibido: ${message}`);
+    // Puedes procesar el mensaje aquí y responder si es necesario.
+  });
+
+  ws.on('close', () => {
+    console.log('Cliente desconectado');
+  });
+});
+
+// Iniciar el servidor
+server.listen(process.env.PORT || 3000, () => {
+  console.log(`Servidor en ejecución en el puerto ${server.address().port}`);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 // Importa los módulos Fastify y fastify-websocket
 const fastify = require('fastify')({ logger: true });
@@ -18,6 +70,14 @@ fastify.get('/socket', { websocket: true }, (connection, req) => {
 });
 
 
+// Iniciar el servidor Fastify
+fastify.listen(3000, (err, address) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  console.log(`Servidor WebSocket en ejecución en ${address}`);
+});
 
 
 
@@ -36,3 +96,4 @@ fastify.listen(
   }
 );
 
+*/
