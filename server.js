@@ -1,11 +1,20 @@
 
 
-// Importa el módulo Fastify
-const fastify = require('fastify')();
+// Importa los módulos Fastify y fastify-websocket
+const fastify = require('fastify')({ logger: true });
+const fastifyWebSocket = require('fastify-websocket');
 
-// Definir una ruta y manejar la solicitud
-fastify.get('/', (request, reply) => {
-  reply.send({ message: '¡Hola, mundo!' });
+// Registra fastify-websocket como un plugin de Fastify
+fastify.register(fastifyWebSocket);
+
+// Maneja las solicitudes WebSocket
+fastify.get('/socket', { websocket: true }, (connection, req) => {
+  connection.socket.on('message', (message) => {
+    // Manejar los mensajes entrantes desde el cliente
+    console.log('Mensaje del cliente:', message);
+    // Puedes responder al cliente
+    connection.socket.send('¡Mensaje recibido!');
+  });
 });
 
 
