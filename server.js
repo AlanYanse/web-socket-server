@@ -1,23 +1,11 @@
 
 
-const net = require('net');
+// Importa el módulo Fastify
+const fastify = require('fastify')();
 
-const server = net.createServer((socket) => {
-  console.log('Cliente conectado.');
-
-  socket.on('data', (data) => {
-    console.log('Datos recibidos del cliente:', data.toString());
-    socket.write('¡Hola, cliente!');
-  });
-
-  socket.on('end', () => {
-    console.log('Cliente desconectado.');
-  });
-});
-
-const PORT = process.env.PORT;
-server.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+// Definir una ruta y manejar la solicitud
+fastify.get('/', (request, reply) => {
+  reply.send({ message: '¡Hola, mundo!' });
 });
 
 
@@ -25,9 +13,6 @@ server.listen(PORT, () => {
 
 
 
-
-
-/*
 
 
 // Run the server and report out to the logs
@@ -42,4 +27,3 @@ fastify.listen(
   }
 );
 
-*/
