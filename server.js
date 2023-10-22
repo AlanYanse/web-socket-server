@@ -11,8 +11,9 @@ wss.on('connection', (ws) => {
 
   ws.on('message', (message) => {
     console.log(`Mensaje recibido: ${message}`);
+    
     // Puedes procesar el mensaje aquí y responder si es necesario.
-    ws.send("Hola Cliente");
+    // ws.send("Hola Cliente");
   });
 
   ws.on('close', () => {
