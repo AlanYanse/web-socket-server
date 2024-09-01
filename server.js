@@ -13,7 +13,7 @@ wss.on('connection', (ws) => {
     console.log(`Mensaje recibido: ${message}`);
     
     // Puedes procesar el mensaje aquí y responder si es necesario.
-    ws.send(`${message}`);
+    //ws.send(`${message}`);
   });
 
   ws.on('close', () => {
